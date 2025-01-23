@@ -1,4 +1,9 @@
 language: r
 cache: packages
 
+before_install:
+  - if [[ -f DESCRIPTION ]]; then
+      echo "DESCRIPTION file has changed, invalidating cache"
+      rm -rf ~/.R/
+    fi
 
