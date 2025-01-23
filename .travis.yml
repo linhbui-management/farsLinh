@@ -1,9 +1,16 @@
 language: r
-cache: packages
 
 before_install:
-  - if [[ -f DESCRIPTION ]]; then
-      echo "DESCRIPTION file has changed, invalidating cache"
-      rm -rf ~/.R/
-    fi
+  - sudo mkdir -p /tmp/my_keyring  # Create a temporary directory for keyring
+  - sudo gpg --keyring /tmp/my_keyring --batch --generate-keyring  # Generate a new keyring
+  - curl -L https://github.com/linhbui-management/farsLinh/archive/refs/heads/main.zip -o farsLinh.zip  # Download the package as a ZIP archive
 
+install:
+  - sudo Rscript -e 'install.packages("devtools")'  # Install devtools package
+  - sudo Rscript -e 'devtools::install_github("linhbui-management/farsLinh@main", auth_token="$GITHUB_TOKEN")'  # Install farsLinh from GitHub with specific commit
+
+script:
+  - sudo Rscript -e 'devtools::test()'  # Run tests on the installed package
+
+after_success:
+  - sudo rm -rf /tmp/my_keyring  # Clean up the temporary keyring
