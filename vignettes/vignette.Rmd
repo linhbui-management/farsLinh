@@ -1,0 +1,42 @@
+---
+title: "This is the first package I made for the course Advanced R Programming"
+author: "Linh Bui"
+date: "23 Jan 2025"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{My first package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+This vignette provides an overview of the fars_assigment package, which includes functions for data analysis and visualization.
+
+# Functions
+## The `make_filename` function
+
+This function reads a CSV file and returns its contents as a tibble.
+It checks if the file exists before attempting to read it.
+
+## The `fars_read` function
+
+This function generates a filename for accident data based on the given year. 
+The filename follows the format "accident_<year>.csv.bz2".
+
+## The `fars_read_years` function
+
+This function reads accident data files for multiple years and returns a list of tibbles.
+Each tibble contains the month and year columns. If a file for a particular year does not exist,' a warning is issued and `NULL` is returned for that year.
+
+## The `fars_summarize_years` function
+
+This function reads accident data for multiple years, combines the data, and summarizes the number of accidents by year and month.
+
+## The `fars_map_state` function
+
+This function plots the locations of accidents on a state map for a specified year.
+It reads the accident data, filters it by the given state number, and plots the longitude and latitude of the accidents.
+
+# Conclusion
+This vignette has demonstrated the basic usage of the fars package. For more detailed information, refer to the package documentation and help files.
